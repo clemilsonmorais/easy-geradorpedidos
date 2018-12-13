@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  for pedido in pedidos
+    |#{pedido.nome}:
+    br
+    if pedido.opcoes && pedido.opcoes.length > 0
+      for opcao in pedido.opcoes
+        |#{opcao}
+        br
+    else
+      |ih
+
+    br

@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  .formCardapio
+    form(method="post", action="/inserirCardapio")
+      textarea.form-control(name="cardapio", cols="30", rows="10")
+      br
+      input.btn(type="submit", value="Inserir Cardápio", required="required")
+  div
+    |Opções atuais: #{opcoes}
+
+  .pedidos
+    if pedidos && pedidos.length > 0 
+      h2 pedidos: 
+      .table.table-responsive
+        table
+          tbody
+            for pedido in pedidos
+              tr
+                td
+                  |#{pedido.nome}
+                td
+                  | #{pedido.opcoes}
+                td
+                  //form(action="/remover", method="post")
+                    input(type="hidden", name="nome", value=`${pedido.nome}`)
+                    input.btn(type="submit", value="Remover")
+                  a.btn.btn-primary(href=`/remover/${pedido.nome}`) Remover
+            br
+      a(href="/gerarPedido") Gerar Pedido
+    else
+      h2 nenhum pedido submetido
+  
+  .gerado

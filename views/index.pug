@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h2 Advanced Gerador de Pedidos v0.1
+  div
+    form(action="/enviar", method="post")
+      label Nome: 
+      input.form-control(type="text", name="nome", required="required")
+      .invalid-feedback
+        |Preencha o nome
+      br
+      .table.table-responsive
+        table
+          tbody
+              for op in opcoes
+                tr
+                  td(style="font-size:18px;")
+                    |#{op} 
+                  td
+                    input(type="checkbox", name="opcoes", value=`${op}`, style="height:22px;width:22px;")
+      br
+      input.btn(type="submit")
+  .pedidos-submetidos
+    h3 Pedidos enviados:
+    p
+      if pedidos && pedidos.length > 0
+        for pedido in pedidos
+          |#{pedido.nome}
+          |: #{pedido.opcoes}
+          br
+        
+      else
+        h4 nenhum pedido submetido
+      
+
+  
