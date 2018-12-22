@@ -12,13 +12,12 @@ block content
       .table.table-responsive
         table
           tbody
-              each val, index in opcoes
-                tr                  
+              for op in opcoes
+                tr
                   td(style="font-size:18px;")
-                    label(for=`input-${index}`) 
-                      | #{val} 
+                    |#{op} 
                   td
-                    input(id=`input-${index}`,type="checkbox", name="opcoes", value=`${val}`, style="height:22px;width:22px;")
+                    input(type="checkbox", name="opcoes", value=`${op}`, style="height:22px;width:22px;")
       br
       input.btn(type="submit")
   .pedidos-submetidos
