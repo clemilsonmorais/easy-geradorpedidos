@@ -20,7 +20,7 @@ block content
                 td
                   |#{pedido.nome}
                 td
-                  | #{pedido.opcoes}
+                  | #{pedido.opcoes} (Obs.: #{pedido.observacao})
                 td
                   //form(action="/remover", method="post")
                     input(type="hidden", name="nome", value=`${pedido.nome}`)

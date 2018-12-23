@@ -19,6 +19,9 @@ block content
                   td
                     input(type="checkbox", name="opcoes", value=`${op}`, style="height:22px;width:22px;")
       br
+      label Observação: 
+      input.form-control(type="text", name="observacao", placeholder="Tem alguma observação sobre o seu pedido? Insira aqui.")
+      br
       input.btn(type="submit")
   .pedidos-submetidos
     h3 Pedidos enviados:
@@ -27,6 +30,7 @@ block content
         for pedido in pedidos
           |#{pedido.nome}
           |: #{pedido.opcoes}
+          |(Obs.:#{pedido.observacao})
           br
         
       else

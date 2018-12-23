@@ -22,7 +22,11 @@ router.post('/enviar', (req, res, next) => {
     } else {
       ops = req.body.opcoes;
     }
-    pedidos.push({nome: req.body.nome, opcoes: ops});
+    let observacao = "";
+    if (req.body.observacao && req.body.observacao.length > 0) {
+      observacao = req.body.observacao;
+    }    
+    pedidos.push({nome: req.body.nome, opcoes: ops, observacao: observacao});
   }
   res.redirect('/');
 });
