@@ -8,7 +8,8 @@ block content
       for opcao in pedido.opcoes
         |#{opcao}
         br
-      |(Obs.: #{pedido.observacao})
+      if pedido.observacao
+        |(Obs.: #{pedido.observacao})
       br
     else
       |ih

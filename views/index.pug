@@ -30,7 +30,8 @@ block content
         for pedido in pedidos
           |#{pedido.nome}
           |: #{pedido.opcoes}
-          |(Obs.:#{pedido.observacao})
+          if pedido.observacao
+            |(Obs.:#{pedido.observacao})
           br
         
       else
