@@ -9,20 +9,16 @@ block content
       .invalid-feedback
         |Preencha o nome
       br
-      .table.table-responsive
-        table
-          tbody
-              for op in opcoes
-                tr
-                  td(style="font-size:18px;")
-                    |#{op} 
-                  td
-                    input(type="checkbox", name="opcoes", value=`${op}`, style="height:22px;width:22px;")
+      for op in Object.entries(opcoes)
+        label(for=`check-opcoes-${op[0]}` class="opcao")
+          input(id=`check-opcoes-${op[0]}` type="checkbox", name="opcoes", value=`${opcoes[op[0]]}`)
+          span(style="padding-left: 10px")
+            |#{opcoes[op[0]]}
       br
       label Observação: 
       input.form-control(type="text", name="observacao", placeholder="Tem alguma observação sobre o seu pedido? Insira aqui.")
       br
-      input.btn(type="submit")
+      input.btn.btn-primary(type="submit")
   .pedidos-submetidos
     h3 Pedidos enviados:
     p

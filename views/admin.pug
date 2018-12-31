@@ -5,7 +5,7 @@ block content
     form(method="post", action="/inserirCardapio")
       textarea.form-control(name="cardapio", cols="30", rows="10")
       br
-      input.btn(type="submit", value="Inserir Cardápio", required="required")
+      input.btn.btn-primary(type="submit", value="Inserir Cardápio", required="required")
   div
     |Opções atuais: #{opcoes}
 
@@ -25,7 +25,7 @@ block content
                   //form(action="/remover", method="post")
                     input(type="hidden", name="nome", value=`${pedido.nome}`)
                     input.btn(type="submit", value="Remover")
-                  a.btn.btn-primary(href=`/remover/${pedido.nome}`) Remover
+                  a.btn.btn-danger(href=`/remover/${pedido.nome}`) Remover
             br
       a(href="/gerarPedido") Gerar Pedido
     else

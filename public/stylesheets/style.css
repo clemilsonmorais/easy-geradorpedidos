@@ -7,3 +7,15 @@ body {
 a {
   color: #00B7FF;
 }
+
+.opcao {
+  border:0px solid #ccc;
+  padding:8px;
+  margin:0 0 8px;
+  display:block; 
+ }
+ 
+.opcao:hover {
+  background:#eee;
+  cursor:pointer;
+ }
