@@ -7,6 +7,10 @@
 var app = require('../app');
 var debug = require('debug')('gerador-pedidos:server');
 var http = require('http');
+var cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+
 
 /**
  * Get port from environment and store in Express.

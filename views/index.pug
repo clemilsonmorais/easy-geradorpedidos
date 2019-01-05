@@ -1,6 +1,12 @@
 extends layout
 
 block content
+  if submetido
+      script.
+        exibirMensagemSucesso('Pedido submetido com sucesso')
+  if submetido != null && !submetido
+      script.
+        exibirMensagemErro('Falha ao submeter o pedido');
   h2 Advanced Gerador de Pedidos v0.1
   if opcoes && opcoes.length > 1
     div
