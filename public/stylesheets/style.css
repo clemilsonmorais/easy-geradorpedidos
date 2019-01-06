@@ -16,6 +16,11 @@ a {
  }
  
 .opcao:hover {
-  background:#eee;
+  background:#b7b7b7;
   cursor:pointer;
+ }
+
+ .selecionado {
+   background: #2f4873;
+   color: white;
  }

@@ -17,10 +17,13 @@ block content
           |Preencha o nome
         br
         for op in Object.entries(opcoes)
-          label(for=`check-opcoes-${op[0]}` class="opcao")
-            input(id=`check-opcoes-${op[0]}` type="checkbox", name="opcoes", value=`${opcoes[op[0]]}`)
-            span(style="padding-left: 10px")
-              |#{opcoes[op[0]]}
+          
+              label.row(for=`check-opcoes-${op[0]}` class="opcao", onclick="marcarItemSelecionado(this)")
+                .col-11
+                  input(id=`check-opcoes-${op[0]}` type="checkbox", name="opcoes", value=`${opcoes[op[0]]}`, style="display:none")
+                  |#{opcoes[op[0]]}
+                .col-1
+                  i.fa.fa-check(style="color: white")
         br
         label Observação: 
         input.form-control(type="text", name="observacao", placeholder="Tem alguma observação sobre o seu pedido? Insira aqui.")
