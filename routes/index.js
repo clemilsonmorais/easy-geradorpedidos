@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var opcoes = ['*Mini*'];
 var pedidos = [];
+var encerrado = false;
 
 
 router.get('/', (req, res, next) => {
@@ -12,32 +13,36 @@ router.get('/', (req, res, next) => {
   }
   res.clearCookie("submetido", { httpOnly: true });
   console.log(context);
-  res.render('index', { title: 'Express', opcoes, pedidos, submetido });
+  res.render('index', { title: 'Express', opcoes, pedidos, submetido, encerrado });
 });
 
 
 router.get('/admin', (req, res, next) => {
-  res.render('admin', { pedidos, opcoes });
+  res.render('admin', { pedidos, opcoes, encerrado });
 });
 
 router.post('/enviar', (req, res, next) => {
   if (req.body.nome && req.body.nome.length > 0) {
-    pedidos = pedidos.filter(p => p.nome != req.body.nome);
-    let ops = []
-    if (typeof (req.body.opcoes) == 'string') {
-      ops = [req.body.opcoes];
-    } else {
-      ops = req.body.opcoes;
+    if (encerrado) {
+      res.cookie("submetido", "false", { httpOnly: true });
+     } else {
+      pedidos = pedidos.filter(p => p.nome != req.body.nome);
+      let ops = []
+      if (typeof (req.body.opcoes) == 'string') {
+        ops = [req.body.opcoes];
+      } else {
+        ops = req.body.opcoes;
+      }
+      let observacao = "";
+      if (req.body.observacao && req.body.observacao.length > 0) {
+        observacao = req.body.observacao;
+      }
+      pedidos.push({ nome: req.body.nome, opcoes: ops, observacao: observacao });
+      res.cookie("submetido", "true", { httpOnly: true });
     }
-    let observacao = "";
-    if (req.body.observacao && req.body.observacao.length > 0) {
-      observacao = req.body.observacao;
-    }
-    pedidos.push({ nome: req.body.nome, opcoes: ops, observacao: observacao });
   }
 
   //TODO tratamento quando houver algum problema ao submeter
-  res.cookie("submetido", "true", { httpOnly: true });
   res.redirect('/');
 });
 
@@ -48,6 +53,12 @@ router.post('/inserirCardapio', (req, res, next) => {
     opcoes = opcoes.concat(cardapio.split('\r\n').filter(c => c));
   }
   pedidos = [];
+  encerrado = false;
+  res.redirect('/admin');
+});
+
+router.post('/encerrarCardapio', (req, res, next) => {
+  encerrado = true;
   res.redirect('/admin');
 });
 

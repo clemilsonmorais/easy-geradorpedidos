@@ -9,26 +9,30 @@ block content
         exibirMensagemErro('Falha ao submeter o pedido');
   h2 Advanced Gerador de Pedidos v0.1
   if opcoes && opcoes.length > 1
-    div
-      form(action="/enviar", method="post")
-        label Nome: 
-        input.form-control(type="text", name="nome", required="required")
-        .invalid-feedback
-          |Preencha o nome
-        br
-        for op in Object.entries(opcoes)
-          
-              label.row(for=`check-opcoes-${op[0]}` class="opcao", onclick="marcarItemSelecionado(this)")
-                .col-11
-                  input(id=`check-opcoes-${op[0]}` type="checkbox", name="opcoes", value=`${opcoes[op[0]]}`, style="display:none")
-                  |#{opcoes[op[0]]}
-                .col-1
-                  i.fa.fa-check(style="color: white")
-        br
-        label Observação: 
-        input.form-control(type="text", name="observacao", placeholder="Tem alguma observação sobre o seu pedido? Insira aqui.")
-        br
-        input.btn.btn-primary(type="submit")
+    if encerrado
+      h4 Cardápio encerrado
+    else
+      div
+        form(action="/enviar", method="post")
+          label Nome: 
+          input.form-control(type="text", name="nome", required="required")
+          .invalid-feedback
+            |Preencha o nome
+          br
+          h5 Opções disponíveis:
+          for op in Object.entries(opcoes)
+            label.row(for=`check-opcoes-${op[0]}` class="opcao", onclick="marcarItemSelecionado(this)")
+              .col-11
+                input(id=`check-opcoes-${op[0]}` type="checkbox", name="opcoes", value=`${opcoes[op[0]]}`, style="display:none")
+                |#{opcoes[op[0]]}
+              .col-1
+                i.fa.fa-check(style="color: white")
+          br
+          label Observação: 
+          input.form-control(type="text", name="observacao", placeholder="Tem alguma observação sobre o seu pedido? Insira aqui.")
+          br
+          input.btn.btn-primary(type="submit")
+    hr
     .pedidos-submetidos
       h3 Pedidos enviados:
       p

@@ -1,32 +1,51 @@
 extends layout
 
 block content
-  .formCardapio
-    form(method="post", action="/inserirCardapio")
-      textarea.form-control(name="cardapio", cols="30", rows="10")
-      br
-      input.btn.btn-primary(type="submit", value="Inserir Cardápio", required="required")
-    if opcoes && opcoes.length > 1
-      div
-        |Opções atuais: #{opcoes}
-
-  .pedidos
-    if pedidos && pedidos.length > 0 
-      h2 pedidos: 
-      .table.table-responsive
-        table
-          tbody
-            for pedido in pedidos
-              tr
-                td
-                  |#{pedido.nome}
-                td
-                  | #{pedido.opcoes} 
-                  if pedido.observacao
-                    | (Obs.: #{pedido.observacao})
-                td
-                  a.btn.btn-danger(href=`/remover/${pedido.nome}`) Remover
-            br
-      a(href="/gerarPedido") Gerar Pedido
-    else
-      h2 nenhum pedido submetido
+  .formCardapio.row
+    .col.md-12
+      form(method="post", action="/inserirCardapio")
+        textarea.form-control(name="cardapio", cols="30", rows="10")
+        br
+        input.btn.btn-primary(type="submit", value="Inserir Cardápio", required="required")
+      .pedidos
+      if pedidos && pedidos.length > 0 
+        h2 pedidos: 
+        .table.table-responsive
+          table
+            tbody
+              for pedido in pedidos
+                tr
+                  td
+                    |#{pedido.nome}
+                  td
+                    | #{pedido.opcoes} 
+                    if pedido.observacao
+                      | (Obs.: #{pedido.observacao})
+                  td
+                    a.btn.btn-danger(href=`/remover/${pedido.nome}`) Remover
+              br
+        a(href="/gerarPedido") Gerar Pedido
+      else
+        h2 nenhum pedido submetido
+    
+    .col.md-12
+      if encerrado
+         .card
+          .card-header
+            h5 Cardápio encerrado
+          .card-body
+            |Os pedidos enviados ficarão disponíveis para geração
+      else if opcoes && opcoes.length > 1
+        .card
+          .card-header
+            .row
+              h5.col-md-6
+                |Opções atuais
+              .col-md-6
+                form.float-right(method="post", action="/encerrarCardapio")
+                  input.btn.btn-primary(type="submit", value="Encerrar Cardápio", required="required")
+          //.card-body
+          ul.list-group.list-group-flush
+            for op in opcoes
+              li.list-group-item #{op}
+              //br
