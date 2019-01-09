@@ -6,7 +6,11 @@ block content
       form(method="post", action="/inserirCardapio")
         textarea.form-control(name="cardapio", cols="30", rows="10")
         br
-        input.btn.btn-primary(type="submit", value="Inserir Cardápio", required="required")
+        .btn-group
+            input.btn.btn-outline-primary(type="submit", value="Inserir Cardápio", required="required")
+            a.btn.btn-outline-primary(href="/gerarPedido") Gerar Pedido
+            a.btn.btn-outline-primary(href="/enviarPedidoWhatsapp") Enviar pelo Whatsapp
+      br
       .pedidos
       if pedidos && pedidos.length > 0 
         h2 pedidos: 
@@ -24,7 +28,7 @@ block content
                   td
                     a.btn.btn-danger(href=`/remover/${pedido.nome}`) Remover
               br
-        a(href="/gerarPedido") Gerar Pedido
+        
       else
         h2 nenhum pedido submetido
     

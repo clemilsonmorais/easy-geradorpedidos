@@ -25,7 +25,7 @@ router.post('/enviar', (req, res, next) => {
   if (req.body.nome && req.body.nome.length > 0) {
     if (encerrado) {
       res.cookie("submetido", "false", { httpOnly: true });
-     } else {
+    } else {
       pedidos = pedidos.filter(p => p.nome != req.body.nome);
       let ops = []
       if (typeof (req.body.opcoes) == 'string') {
@@ -70,6 +70,21 @@ router.get('/remover/:nome', (req, res, next) => {
 
 router.get('/gerarPedido', (req, res, next) => {
   res.render('gerar', { pedidos });
+});
+
+router.get('/enviarPedidoWhatsapp', async (req, res, next) => {
+  let pedidoStr = '';
+  pedidos.forEach(pedido => {
+    pedidoStr += `${pedido.nome}:\r\n`;
+    pedido.opcoes.forEach(opcao => {
+      pedidoStr += `${opcao}\r\n`;
+    });
+    if (pedido.observacao) {
+      pedidoStr += `(Obs.:${pedido.observacao})\r\n`;
+    }
+    pedidoStr += '\r\n';
+  });
+  res.status(301).redirect(`https://api.whatsapp.com/send?text=${pedidoStr}`);
 });
 
 
