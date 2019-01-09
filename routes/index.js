@@ -50,7 +50,7 @@ router.post('/inserirCardapio', (req, res, next) => {
   let cardapio = req.body.cardapio.trim();
   opcoes = ['*Mini*'];
   if (cardapio) {
-    opcoes = opcoes.concat(cardapio.split('\r\n').filter(c => c));
+    opcoes = opcoes.concat(cardapio.split('\r\n'));
   }
   pedidos = [];
   encerrado = false;
