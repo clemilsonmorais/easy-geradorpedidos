@@ -22,7 +22,7 @@ block content
           h5 Opções disponíveis:
           for op in Object.entries(opcoes)
             if op[1] && op[1].length > 1
-              label.row(for=`check-opcoes-${op[0]}` class="opcao", onclick="marcarItemSelecionado(this)")
+              label.row.rounded(for=`check-opcoes-${op[0]}` class="opcao", onclick="marcarItemSelecionado(this)")
                 .col-11
                   input(id=`check-opcoes-${op[0]}` type="checkbox", name="opcoes", value=`${opcoes[op[0]]}`, style="display:none")
                   |#{opcoes[op[0]]}
