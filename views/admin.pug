@@ -2,20 +2,23 @@ extends layout
 
 block content
   .formCardapio.row
-    .col.md-12
-      form(method="post", action="/inserirCardapio")
-        textarea.form-control(name="cardapio", cols="30", rows="10")
-        br
-        .btn-group
-            button.btn.btn-outline-primary(type="submit", value="Inserir Cardápio", required="required")
-              i.fa.fa-plus
-              span  Inserir Cardápio
-            a.btn.btn-outline-primary(href="/gerarPedido")
-              i.fa.fa-file-alt
-              span  Gerar Pedido
-            a.btn.btn-outline-primary(href="/enviarPedidoWhatsapp")
-              i.fab.fa-whatsapp
-              span  Enviar pelo Whatsapp
+    .col.col-md-6
+      .row
+        .col-md-12
+          form(method="post", action="/inserirCardapio")
+            textarea.form-control(name="cardapio", cols="30", rows="10")
+            br
+      .row
+        .col-md-12
+          button.btn.btn-outline-primary.btn-block(type="submit", value="Inserir Cardápio", required="required")
+            i.fa.fa-plus
+            span  Inserir Cardápio
+          a.btn.btn-outline-primary.btn-block(href="/gerarPedido")
+            i.fa.fa-file-alt
+            span  Gerar Pedido
+          a.btn.btn-outline-primary.btn-block(href="/enviarPedidoWhatsapp")
+            i.fab.fa-whatsapp
+            span  Enviar pelo Whatsapp
       br
       .pedidos
       if pedidos && pedidos.length > 0 
@@ -38,7 +41,7 @@ block content
       else
         h2 nenhum pedido submetido
     
-    .col.md-12
+    .col.col-md-6
       if encerrado
          .card
           .card-header
