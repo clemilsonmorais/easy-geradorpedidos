@@ -13,12 +13,12 @@ router.get('/', (req, res, next) => {
   }
   res.clearCookie("submetido", { httpOnly: true });
   console.log(context);
-  res.render('index', { title: 'Express', opcoes, pedidos, submetido, encerrado });
+  res.render('index', { title: 'Easy Gerador Pedidos', opcoes, pedidos, submetido, encerrado });
 });
 
 
 router.get('/admin', (req, res, next) => {
-  res.render('admin', { pedidos, opcoes, encerrado });
+  res.render('admin', { title: 'Easy Gerador Pedidos - Administração', pedidos, opcoes, encerrado });
 });
 
 router.post('/enviar', (req, res, next) => {
@@ -69,7 +69,7 @@ router.get('/remover/:nome', (req, res, next) => {
 
 
 router.get('/gerarPedido', (req, res, next) => {
-  res.render('gerar', { pedidos });
+  res.render('gerar', { title: 'Easy Gerador Pedidos - Pedidos', pedidos });
 });
 
 router.get('/enviarPedidoWhatsapp', async (req, res, next) => {
