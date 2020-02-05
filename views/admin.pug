@@ -39,7 +39,7 @@ block content
               br
         
       else
-        h2 nenhum pedido submetido
+        h2 Nenhum pedido submetido
     
     .col.col-md-6
       if encerrado
@@ -51,8 +51,8 @@ block content
       else if opcoes && opcoes.length > 1
         .card
           .card-header
-            .row
-              h5.col-md-6
+            .row.align-items-center
+              h5.col-md-6.mb-0
                 |Opções atuais
               .col-md-6
                 form.float-right(method="post", action="/encerrarCardapio")
