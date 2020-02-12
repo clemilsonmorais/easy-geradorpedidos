@@ -57,7 +57,7 @@ router.post('/inserirCardapio', (req, res, next) => {
   res.redirect('/admin');
 });
 
-router.post('/encerrarCardapio', (req, res, next) => {
+router.post('/encerrarCardapio', (req, res, next) => {    
   encerrado = true;
   res.redirect('/admin');
 });
