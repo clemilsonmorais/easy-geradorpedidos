@@ -40,6 +40,9 @@ block content
       h3 Pedidos enviados:
       p
         if pedidos && pedidos.length > 0
+          pre
+            code
+              #{JSON.stringify(pedido, null, '  ')}
           for pedido in pedidos
             |#{pedido.nome}
             |: #{pedido.opcoes}
@@ -48,6 +51,6 @@ block content
             br
           
         else
-          h4 nenhum pedido submetido
+          h4 Nenhum pedido submetido
   else
     h4 Cardápio não registrado

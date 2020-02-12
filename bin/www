@@ -5,7 +5,6 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('gerador-pedidos:server');
 var http = require('http');
 var cookieParser = require("cookie-parser");
 
@@ -71,11 +70,9 @@ function onError(error) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
       process.exit(1);
-      break;
     case 'EADDRINUSE':
       console.error(bind + ' is already in use');
       process.exit(1);
-      break;
     default:
       throw error;
   }
@@ -89,6 +86,6 @@ function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    : 'porta ' + addr.port;
+  console.log(`Servidor rodando na ${bind}!`);
 }

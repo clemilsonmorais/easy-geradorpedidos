@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var opcoes = ['*Mini*'];
+
+var low = require('lowdb');
+var FileSync = require('lowdb/adapters/FileSync');
+var adapter = new FileSync('db.json');
+var db = low(adapter);
+
+// Usado apenas na primeira vez, cria o arquivo caso não exista
+db.defaults({ pedidos: [], opcoes: ['*Mini*'] }).write();
+
+var opcoes = db.get('opcoes').value();
 var pedidos = [];
 var encerrado = false;
-
 
 router.get('/', (req, res, next) => {
   var context = req.cookies["submetido"];
@@ -15,7 +23,6 @@ router.get('/', (req, res, next) => {
   console.log(context);
   res.render('index', { title: 'Easy Gerador Pedidos', opcoes, pedidos, submetido, encerrado });
 });
-
 
 router.get('/admin', (req, res, next) => {
   res.render('admin', { title: 'Easy Gerador Pedidos - Administração', pedidos, opcoes, encerrado });
@@ -52,6 +59,7 @@ router.post('/inserirCardapio', (req, res, next) => {
   if (cardapio) {
     opcoes = opcoes.concat(cardapio.split('\r\n'));
   }
+  db.set('opcoes', opcoes).write();
   pedidos = [];
   encerrado = false;
   res.redirect('/admin');
