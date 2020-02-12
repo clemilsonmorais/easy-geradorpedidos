@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
 
 
 router.get('/admin', (req, res, next) => {
-  res.render('admin', { pedidos, opcoes, encerrado });
+  res.render('admin', { pedidos, opcoes, encerrado });  
 });
 
 router.post('/enviar', (req, res, next) => {
@@ -57,7 +57,7 @@ router.post('/inserirCardapio', (req, res, next) => {
   res.redirect('/admin');
 });
 
-router.post('/encerrarCardapio', (req, res, next) => {
+router.post('/encerrarCardapio', (req, res, next) => {    
   encerrado = true;
   res.redirect('/admin');
 });
