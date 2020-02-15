@@ -10,7 +10,7 @@ block content
             br
             .row
               .col-md-12
-                button.btn.btn-outline-primary.btn-block(type="submit", value="Inserir Cardápio", required="required")
+                button.btn.btn-outline-primary.btn-block(type="submit", value="Inserir Cardápio", required="required", onClick="return confirm('Atenção, caso existam pedidos em aberto, serão removidos. Prosseguir?')")
                   i.fa.fa-plus
                   span  Inserir Cardápio
                 a.btn.btn-outline-primary.btn-block(href="/gerarPedido")
@@ -35,7 +35,7 @@ block content
                     if pedido.observacao
                       | (Obs.: #{pedido.observacao})
                   td
-                    a.btn.btn-danger(href=`/remover/${pedido.nome}`) Remover
+                    a.btn.btn-danger(href=`javascript:;`, onclick=`exibirMensagemConfirmacao('Remover pedido', 'O pedido será removido', '/remover/${pedido.nome}')`) Remover
               br
         
       else
@@ -56,7 +56,7 @@ block content
                 |Opções atuais
               .col-md-6
                 form.float-right(method="post", action="/encerrarCardapio")
-                  input.btn.btn-primary(type="submit", value="Encerrar Cardápio", required="required")
+                  input.btn.btn-primary(type="submit", value="Encerrar Cardápio", required="required", onClick="return confirm('Encerrar cardápio?');")
           //.card-body
           ul.list-group.list-group-flush
             for op in opcoes
