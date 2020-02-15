@@ -13,7 +13,7 @@ block content
       h4 Cardápio encerrado
     else
       div
-        form(action="/enviar", method="post")
+        form(id="pedido-form", action="/enviar", method="post")
           label Nome: 
           input.form-control(type="text", name="nome", required="required")
           .invalid-feedback
@@ -54,3 +54,6 @@ block content
           h4 Nenhum pedido submetido
   else
     h4 Cardápio não registrado
+
+block append script
+  script(src='js/index.js')
